@@ -8,7 +8,7 @@ body {
   overflow: hidden;
 }
 
-.container {
+#container {
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(135deg, #153677, #4e085f);
@@ -70,7 +70,7 @@ body {
   font-size: 20px;
 }
 
-.input-goal {
+#input-goal {
   display: flex;
   justify-content: center;
 }
@@ -132,7 +132,7 @@ input:hover {
   border-radius: 30px;
 }
 
-.inner-wrapper {
+[id*='inner-wrapper'] {
   width: 0; /* 처음에는 width 를 0으로 생성*/
   height: 0;
   background-color: #ab5edb;
@@ -148,7 +148,7 @@ input:hover {
     box-shadow 1.5s ease-in-out;
 }
 
-.typed-goal {
+[id*='typed-goal'] {
   overflow-y: hidden;
   opacity: 0;
   transition: opacity 4s ease;
