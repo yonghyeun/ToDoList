@@ -22,7 +22,7 @@ const updateProgressText = () => {
 const updateProgressBar = () => {
   const accomplish = Math.round((completedGoals / totalGoals) * 100);
   $progressBar.style.width = `${!accomplish ? 0 : accomplish}%`;
-  $progressBar.textContent = `${accomplish}%`;
+  $progressBar.textContent = `${!accomplish ? 0 : accomplish}%`;
 
   if (!accomplish) {
     $progressBar.textContent = '';
@@ -55,7 +55,6 @@ const createTypedGoal = (innerWrapper) => {
   const $typedGoal = document.createElement('div');
 
   $typedGoal.classList.add('typed-goal');
-  $typedGoal.id = 'uncompleted';
   $typedGoal.textContent = $input.value;
   $innerWrapper.appendChild($typedGoal);
 
@@ -76,7 +75,8 @@ const createButtonWrapper = (innerWrapper) => {
   const $delete = document.createElement('button');
 
   [$complete.textContent, $delete.textContent] = ['⭕', '❌️'];
-  [$complete.id, $delete.id] = ['complete', 'delete'];
+  $complete.classList.add('complete');
+  $delete.classList.add('delete');
 
   [$complete, $delete].forEach((button) => {
     const $button = button;
@@ -96,10 +96,8 @@ const setGoal = () => {
   const $newGoal = createInnerWrapper();
   createTypedGoal($newGoal);
   createButtonWrapper($newGoal);
-  totalGoals += 1;
   updateProgressText();
   updateProgressBar();
-  $input.value = ''; // 태그를 추가한 후에는 input 값 초기화
 };
 
 // submit 버튼이 click 되면 그림자가 퍼지는 함수
@@ -133,13 +131,9 @@ const goalComplete = (event) => {
   // 위치를 변경시키기
   $zoneCompleted.insertBefore($innerWrapper, $zoneCompleted.firstChild);
 
-  $typedGoal.id = 'completed';
-  $innerWrapper.style.boxShadow = '0px 0px 5px blue';
+  $typedGoal.classList.add('completed');
 
   completedGoals += 1;
-  $typedGoal.style.textDecoration = 'line-through';
-  $typedGoal.style.color = '#aaa';
-  $button.id = '';
 };
 
 // button-wrapper 내의 X 버튼이 눌리면 totalGoals를 내리고
@@ -149,30 +143,19 @@ const goalDelete = (event) => {
   const $buttonWrapper = event.target.parentNode;
   const $typedGoal = $buttonWrapper.previousSibling;
   const $innerWrapper = $buttonWrapper.parentNode;
-
-  if ($typedGoal.id === 'completed') {
+  const $zone = $innerWrapper.parentNode;
+  totalGoals -= 1;
+  if ($typedGoal.classList.contains('completed')) {
     completedGoals -= 1;
   }
-  totalGoals -= 1;
 
-  // 삭제 될 때 애니메이션을 추가하자
-  $typedGoal.style.transition = 'opacity 1.5s ease';
-  $buttonWrapper.style.transition = 'opacity 1.5s ease';
+  // 삭제 될 때 애니메이션을 추가
+  $innerWrapper.style.transition = 'transform 0.5s ease';
+  $innerWrapper.style.transform = 'scale(0)';
 
   setTimeout(() => {
-    $content.removeChild($innerWrapper);
-  }, 3000);
-  requestAnimationFrame(() => {
-    $buttonWrapper.style.opacity = '0';
-    $typedGoal.style.opacity = '0';
-  });
-  $innerWrapper.removeChild($buttonWrapper);
-  $innerWrapper.removeChild($typedGoal);
-  $innerWrapper.style.padding = '0px';
-  requestAnimationFrame(() => {
-    $innerWrapper.style.width = '0%';
-    $innerWrapper.style.height = '0%';
-  });
+    $zone.removeChild($innerWrapper);
+  }, 500);
 };
 
 //  O , X 버튼이 눌릴 때 빨간색 그림자가 나오게 하는 함수
@@ -189,9 +172,9 @@ const shadowButton = (event) => {
 const changeGoal = (event) => {
   if (event.target.tagName !== 'BUTTON') return;
   shadowButton(event);
-  if (event.target.id === 'complete') {
+  if (event.target.classList.contains('complete')) {
     goalComplete(event);
-  } else if (event.target.id === 'delete') {
+  } else if (event.target.classList.contains('delete')) {
     goalDelete(event);
   }
   updateProgressText();
