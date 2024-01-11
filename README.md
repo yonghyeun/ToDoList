@@ -9,7 +9,7 @@
 서버 구현 없이 동작하도록 프로토타입을 만들었습니다.
 자세한 내용은 <a href = 'https://velog.io/@yonghyeun/%EB%B0%94%EB%8B%90%EB%9D%BC-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%A1%9C-To-do-list-%EB%A7%8C%EB%93%A4%EA%B8%B0'>바닐라 자바스크립트로 To do list 만들기 !</a> 를 확인하세요 !
 
-### **ver 2** 업데이트 내용 (2324/01/11)
+### **ver 2** 업데이트 내용 (2024/01/11)
 
 - `express` 를 이용해 서버를 만들고 `fetch` 를 이용해 `GET , POST , PUT , DELETE` 메소드를 사용 할 수 있도록 만들었습니다.
 
