@@ -4,6 +4,8 @@ const $content = document.querySelector('#content');
 const $progressTotal = document.querySelector('#progress-total');
 const $progressText = document.querySelector('#progress-text');
 const $progressBar = document.querySelector('#progress-bar');
+const $zoneUncompleted = document.querySelector('#zone-uncompleted');
+const $zoneCompleted = document.querySelector('#zone-completed');
 let totalGoals = document.getElementsByClassName('typed-goal').length; // 설정한 목표 개수
 let completedGoals = 0; // 성취한 목표 개수
 
@@ -36,7 +38,7 @@ const updateProgressBar = () => {
 const createInnerWrapper = () => {
   const $innerWrapper = document.createElement('div');
   $innerWrapper.classList.add('inner-wrapper');
-  $content.appendChild($innerWrapper);
+  $zoneUncompleted.appendChild($innerWrapper);
 
   requestAnimationFrame(() => {
     $innerWrapper.style.width = '90%';
@@ -116,6 +118,8 @@ const enterToSubmit = (event) => {
   $submit.click();
 };
 
+// 삭제되는 애니메이션을 생성하자
+
 // button-wrapper 내의 O 버튼이 눌리면 completedGoals를 올리고
 // typed-goal의 텍스트를 수정하는 함수 (완료 선 긋기, id = completed 로 변경)
 // 완료된 목표의 innerWrapper 에서 불빛이 나게 하자
@@ -125,6 +129,9 @@ const goalComplete = (event) => {
   const $buttonWrapper = event.target.parentNode;
   const $typedGoal = $buttonWrapper.previousSibling;
   const $innerWrapper = $typedGoal.parentNode;
+
+  // 위치를 변경시키기
+  $zoneCompleted.insertBefore($innerWrapper, $zoneCompleted.firstChild);
 
   $typedGoal.id = 'completed';
   $innerWrapper.style.boxShadow = '0px 0px 5px blue';

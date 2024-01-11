@@ -97,7 +97,7 @@ input:hover {
 }
 
 #text-submit {
-  border-radius: 30px;
+  border-radius: 50%;
   background-color: #68f2af;
   border: 0px;
   transition: box-shadow 0.4s ease;
