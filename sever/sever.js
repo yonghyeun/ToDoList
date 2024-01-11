@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-
+const PORT = 3000;
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing
 
@@ -27,8 +27,8 @@ const database = {
 
 // 서버를 호스팅 할 포트 번호 설정
 // 호스팅되는 서버의 주소 : https://localhost:3000
-app.listen(3000, (req, res) => {
-  console.log('server start !');
+app.listen(PORT, (req, res) => {
+  console.log(`Sever is running on http://localhost:${PORT}`);
 });
 
 app.get('/', (req, res) => {
@@ -109,4 +109,21 @@ app.put('/todo', (req, res) => {
   database.completed.forEach((item, index) => (item.id = index + 1));
 
   res.send(database);
+});
+
+// delete 요청
+
+app.delete('/todo', (req, res) => {
+  const { text } = req.body;
+
+  const targetName = database.uncompleted.some((todo) => todo.text === text)
+    ? 'uncompleted'
+    : 'completed';
+
+  database[`${targetName}`] = database[`${targetName}`].filter(
+    (todo) => todo.text !== text,
+  );
+  database[`${targetName}`].forEach((todo, index) => (todo.id = index + 1));
+
+  res.send('success');
 });

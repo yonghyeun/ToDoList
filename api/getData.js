@@ -8,10 +8,6 @@ const makePage = (todoLists, stateName) => {
     const $innerWrapper = document.createElement('div');
     $innerWrapper.classList.add('inner-wrapper');
     $parentNode.appendChild($innerWrapper);
-    requestAnimationFrame(() => {
-      $innerWrapper.style.width = '90%';
-      $innerWrapper.style.height = '30px';
-    });
 
     // todo 에 들어있는 text를 typedGoal 노드에 적기
     const $typedGoal = document.createElement('div');
@@ -24,10 +20,7 @@ const makePage = (todoLists, stateName) => {
 
     const $buttonWrapper = document.createElement('div');
     $buttonWrapper.classList.add('button-wrapper');
-    requestAnimationFrame(() => {
-      $buttonWrapper.style.opacity = '1'; // 서서히 나타나는 효과
-      $typedGoal.style.opacity = '1';
-    });
+
     const $complete = document.createElement('button');
     const $delete = document.createElement('button');
 
@@ -42,7 +35,12 @@ const makePage = (todoLists, stateName) => {
 
     $innerWrapper.appendChild($buttonWrapper);
 
-    // 전체 목표수 올리기
+    requestAnimationFrame(() => {
+      $innerWrapper.style.width = '90%';
+      $innerWrapper.style.height = '30px';
+      $buttonWrapper.style.opacity = '1'; // 서서히 나타나는 효과
+      $typedGoal.style.opacity = '1';
+    });
   });
 };
 
