@@ -136,3 +136,12 @@ Server is running on http://localhost:3000
 `server` 폴더에서 `crtl + c` 를 눌러 서버를 종료 할 수 있습니다.
 
 현재 `ver 2` 에서는 서버가 종료되면 이전 게시글들은 모두 저장되지 않고 초기화 됩니다.
+
+# 추후 업데이트 계획
+
+- `ToDoList` 에 <a href = 'https://github.com/yonghyeun/BBomodoroTimer'>뽀모도로 타이머</a> 추가 예정
+- 날짜별 `ToDoList` 를 저장 하고 조회 가능한 캘린더 기능 추가
+
+[![GitHub issues](https://img.shields.io/github/issues/yonghyeun/ToDoList)](https://github.com/yonghyeun/ToDoList/issues)
+[![GitHub forks](https://img.shields.io/github/forks/yonghyeun/ToDoList)](https://github.com/yonghyeun/ToDoList/network)
+[![GitHub stars](https://img.shields.io/github/stars/yonghyeun/ToDoList)](https://github.com/yonghyeun/ToDoList/stargazers)
