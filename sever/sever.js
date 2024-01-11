@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-let completedID, uncompletedID; // id 역할
 
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing
@@ -26,14 +25,14 @@ const database = {
   ],
 };
 
-app.get('/', (req, res) => {
-  res.send('hello world');
-});
-
 // 서버를 호스팅 할 포트 번호 설정
 // 호스팅되는 서버의 주소 : https://localhost:3000
 app.listen(3000, (req, res) => {
   console.log('server start !');
+});
+
+app.get('/', (req, res) => {
+  res.send('hello world');
 });
 
 // get 요청에 대한 메소드
@@ -86,4 +85,28 @@ app.post('/todo/uncompleted', (req, res) => {
 
   // 클라이언트에 JSON 응답 보내기
   res.json({ message: 'Item added to uncompleted list successfully' });
+});
+
+// PUT 설정하기
+
+app.put('/todo', (req, res) => {
+  const { text } = req.body; // 성취된 목표의 text 를 할당 받음
+  const targetIndex = database.uncompleted.findIndex((item) => {
+    return item.text === text;
+  });
+
+  if (targetIndex === -1) {
+    res.status(400).json({ error: '잘못된 요청입니다' });
+    return;
+  }
+
+  const target = database.uncompleted.splice(targetIndex, 1)[0];
+  //completed 배열 맨 앞으로 넣기
+  database.completed.unshift(target);
+
+  // 인덱스들 모두 변경하기
+  database.uncompleted.forEach((item, index) => (item.id = index + 1));
+  database.completed.forEach((item, index) => (item.id = index + 1));
+
+  res.send(database);
 });
