@@ -131,7 +131,7 @@ Server is running on http://localhost:3000
 
 ### 4. 웹 애플리케이션 실행
 
-`index.html` 을 실행시켜주시고 사용하시면 됩니다.
+`docs` 폴더 내에 존재하는 `index.html` 을 실행시켜주시고 사용하시면 됩니다.
 
 ### 5. 서버 종료
 
