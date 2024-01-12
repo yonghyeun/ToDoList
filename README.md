@@ -2,6 +2,8 @@
 
 <img src = 'https://velog.velcdn.com/images/yonghyeun/post/1427b669-b96a-4fb2-b74f-3600f6baa2bf/image.gif'>
 
+---
+
 # 프로젝트 버전
 
 ### **ver 1** 업데이트 내용 (2023/12/13)
