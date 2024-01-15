@@ -8,14 +8,18 @@ $content.addEventListener('click', (event) => {
 
   const text = $typedGoal.textContent;
 
-  fetch(url, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text: text }),
-  })
-    .then(() => {
-      $button.classList.remove('complete');
-      $button.classList.add('off');
+  try {
+    fetch(url, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: text }),
     })
-    .catch(console.error);
+      .then(() => {
+        $button.classList.remove('complete');
+        $button.classList.add('off');
+      })
+      .catch(console.error);
+  } catch (e) {
+    console.log(e);
+  }
 });
