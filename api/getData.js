@@ -44,18 +44,14 @@ const makePage = (todoLists, stateName) => {
   });
 };
 
-try {
-  fetch(url)
-    .then((res) => res.json())
-    .then(({ uncompleted, completed }) => {
-      makePage(uncompleted, 'uncompleted');
-      makePage(completed, 'completed');
-      totalGoals += uncompleted.length + completed.length;
-      completedGoals += completed.length;
-      updateProgressText();
-      updateProgressBar();
-    })
-    .catch((e) => console.error(e));
-} catch (e) {
-  console.log(e);
-}
+fetch(url)
+  .then((res) => res.json())
+  .then(({ uncompleted, completed }) => {
+    makePage(uncompleted, 'uncompleted');
+    makePage(completed, 'completed');
+    totalGoals += uncompleted.length + completed.length;
+    completedGoals += completed.length;
+    updateProgressText();
+    updateProgressBar();
+  })
+  .catch((e) => console.error(e));
